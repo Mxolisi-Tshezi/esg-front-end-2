@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Info, X } from 'lucide-react';
 
 const ESGReportingApp = () => {
   // State for the current step
@@ -37,6 +37,7 @@ const ESGReportingApp = () => {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   // Update form data
   const handleInputChange = (e) => {
@@ -69,6 +70,7 @@ const ESGReportingApp = () => {
     setTimeout(() => {
       setGenerating(false);
       setReportGenerated(true);
+      setShowSuccessMessage(true);
     }, 2000);
   };
 
@@ -112,6 +114,7 @@ const ESGReportingApp = () => {
       industry: ''
     });
     setReportGenerated(false);
+    setShowSuccessMessage(false);
   };
 
   // Steps component
@@ -119,24 +122,29 @@ const ESGReportingApp = () => {
     return (
       <div className="flex justify-center items-center mb-8 mt-8">
         <div className="flex items-center">
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep >= 1 ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-            {currentStep > 1 ? <CheckCircle size={16} /> : 1}
-          </div>
-          <div className={`h-1 w-24 ${currentStep > 1 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-          
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep >= 2 ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-            {currentStep > 2 ? <CheckCircle size={16} /> : 2}
-          </div>
-          <div className={`h-1 w-24 ${currentStep > 2 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-          
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep >= 3 ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-            {currentStep > 3 ? <CheckCircle size={16} /> : 3}
-          </div>
-          <div className={`h-1 w-24 ${currentStep > 3 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-          
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep >= 4 ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-            4
-          </div>
+          {[1, 2, 3, 4].map((step, index) => (
+            <React.Fragment key={step}>
+              <div 
+                className={`rounded-full w-8 h-8 flex items-center justify-center ${
+                  currentStep > step 
+                    ? 'bg-green-500 text-white' 
+                    : currentStep === step 
+                      ? 'bg-green-500 text-white' 
+                      : 'bg-gray-300 text-gray-600'
+                }`}
+              >
+                {currentStep > step ? <CheckCircle size={16} /> : step}
+              </div>
+              
+              {step < 4 && (
+                <div 
+                  className={`h-1 w-24 ${
+                    currentStep > step ? 'bg-green-500' : 'bg-gray-300'
+                  }`}
+                ></div>
+              )}
+            </React.Fragment>
+          ))}
         </div>
       </div>
     );
@@ -203,7 +211,12 @@ const ESGReportingApp = () => {
     return (
       <div>
         <div className="mb-6">
-          <h2 className="text-lg font-medium mb-4">1. Board diversity <span className="text-green-500">ⓘ</span></h2>
+          <h2 className="text-lg font-medium mb-4">
+            1. Board diversity 
+            <span className="text-green-500 ml-1">
+              <Info size={16} className="inline" />
+            </span>
+          </h2>
           
           <div className="grid grid-cols-2 gap-8">
             <div>
@@ -391,7 +404,12 @@ const ESGReportingApp = () => {
         </div>
         
         <div className="mb-6">
-          <h2 className="text-lg font-medium mb-4">2. Board independence <span className="text-green-500">ⓘ</span></h2>
+          <h2 className="text-lg font-medium mb-4">
+            2. Board independence 
+            <span className="text-green-500 ml-1">
+              <Info size={16} className="inline" />
+            </span>
+          </h2>
         </div>
         
         <div className="mb-6">
@@ -414,7 +432,10 @@ const ESGReportingApp = () => {
     return (
       <div>
         <div className="mb-8">
-          <h2 className="text-lg font-medium mb-4">2. What are your company's core values?<span className="text-red-500">*</span></h2>
+          <h2 className="text-lg font-medium mb-4">
+            2. What are your company's core values?
+            <span className="text-red-500">*</span>
+          </h2>
           <input
             type="text"
             name="companyValues"
@@ -425,7 +446,10 @@ const ESGReportingApp = () => {
         </div>
         
         <div className="mb-8">
-          <h2 className="text-lg font-medium mb-4">5. What is your company's vision statement?<span className="text-red-500">*</span></h2>
+          <h2 className="text-lg font-medium mb-4">
+            5. What is your company's vision statement?
+            <span className="text-red-500">*</span>
+          </h2>
           <input
             type="text"
             name="visionStatement"
@@ -436,7 +460,10 @@ const ESGReportingApp = () => {
         </div>
         
         <div className="mb-8">
-          <h2 className="text-lg font-medium mb-4">6. What industry does your company operate in?<span className="text-red-500">*</span></h2>
+          <h2 className="text-lg font-medium mb-4">
+            6. What industry does your company operate in?
+            <span className="text-red-500">*</span>
+          </h2>
           <input
             type="text"
             name="industry"
@@ -445,6 +472,18 @@ const ESGReportingApp = () => {
             className="border p-2 w-full rounded"
           />
         </div>
+      </div>
+    );
+  };
+
+  // Success message banner
+  const SuccessMessage = () => {
+    return (
+      <div className="bg-green-500 text-white p-3 flex justify-between items-center">
+        <p>Your report has been successfully generated. Download your ESG report.</p>
+        <button onClick={() => setShowSuccessMessage(false)} className="text-white">
+          <X size={20} />
+        </button>
       </div>
     );
   };
@@ -470,9 +509,6 @@ const ESGReportingApp = () => {
               <div>Generating...</div>
             ) : reportGenerated ? (
               <div>
-                <div className="p-4 mb-4 bg-green-100 text-green-800 rounded">
-                  Your report has been successfully generated. Download your ESG report.
-                </div>
                 <div className="flex justify-center gap-4 mt-8">
                   <button
                     onClick={handleClear}
@@ -516,11 +552,15 @@ const ESGReportingApp = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      {showSuccessMessage && <SuccessMessage />}
       <header className="bg-white p-4 border-b">
         <div className="max-w-6xl mx-auto flex items-center">
-          <div className="text-green-500 font-bold text-lg">
-            BESPOKE<span className="text-xs align-top">TM</span><br />
-            INSIGHT
+          <div className="text-green-500 font-bold text-lg flex items-start">
+            <div className="flex items-start">
+              BESPOKE
+              <span className="text-xs align-top">TM</span>
+            </div>
+            <div>INSIGHT</div>
           </div>
           <div className="ml-8 text-gray-700">
             JSE Sustainability Disclosure Guidance based reporting
@@ -548,7 +588,7 @@ const ESGReportingApp = () => {
           {renderStepContent()}
           
           <div className="flex justify-center gap-4 mt-8">
-            {currentStep > 1 && (
+            {currentStep > 1 && !reportGenerated && (
               <button
                 onClick={prevStep}
                 className="px-6 py-2 border border-gray-300 rounded text-gray-700"
