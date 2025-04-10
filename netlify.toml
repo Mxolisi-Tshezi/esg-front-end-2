@@ -1,0 +1,9 @@
+[build]
+  base = "esg-reporting-app/"
+  publish = "build/"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.js"
+  status = 200
