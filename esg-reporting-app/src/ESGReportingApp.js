@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Info, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { CheckCircle, Info, X } from "lucide-react";
 
 const ESGReportingApp = () => {
   // State for the current step
   const [currentStep, setCurrentStep] = useState(1);
-  const [activeTab, setActiveTab] = useState('board-composition');
+  const [activeTab, setActiveTab] = useState("board-composition");
   const [formData, setFormData] = useState({
     totalBoardMembers: 10,
     blackMembers: 5,
@@ -27,12 +27,12 @@ const ESGReportingApp = () => {
     above50Percentage: 40,
     femalePercentage: 30,
     malePercentage: 70,
-    boardProfile: '',
-    companyValues: '',
-    visionStatement: '',
-    industry: ''
+    boardProfile: "",
+    companyValues: "",
+    visionStatement: "",
+    industry: "",
   });
-  
+
   const [reportGenerated, setReportGenerated] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -44,7 +44,7 @@ const ESGReportingApp = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -108,10 +108,10 @@ const ESGReportingApp = () => {
       above50Percentage: 0,
       femalePercentage: 0,
       malePercentage: 0,
-      boardProfile: '',
-      companyValues: '',
-      visionStatement: '',
-      industry: ''
+      boardProfile: "",
+      companyValues: "",
+      visionStatement: "",
+      industry: "",
     });
     setReportGenerated(false);
     setShowSuccessMessage(false);
@@ -124,22 +124,22 @@ const ESGReportingApp = () => {
         <div className="flex items-center">
           {[1, 2, 3, 4].map((step, index) => (
             <React.Fragment key={step}>
-              <div 
+              <div
                 className={`rounded-full w-8 h-8 flex items-center justify-center ${
-                  currentStep > step 
-                    ? 'bg-green-500 text-white' 
-                    : currentStep === step 
-                      ? 'bg-green-500 text-white' 
-                      : 'bg-gray-300 text-gray-600'
+                  currentStep > step
+                    ? "bg-green-500 text-white"
+                    : currentStep === step
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-300 text-gray-600"
                 }`}
               >
                 {currentStep > step ? <CheckCircle size={16} /> : step}
               </div>
-              
+
               {step < 4 && (
-                <div 
+                <div
                   className={`h-1 w-24 ${
-                    currentStep > step ? 'bg-green-500' : 'bg-gray-300'
+                    currentStep > step ? "bg-green-500" : "bg-gray-300"
                   }`}
                 ></div>
               )}
@@ -169,35 +169,51 @@ const ESGReportingApp = () => {
       </div>
     );
   };
-  
+
   // Governance tabs
   const GovernanceTabs = () => {
     return (
       <div className="flex border-b mb-6">
-        <div 
-          className={`pb-2 px-4 cursor-pointer ${activeTab === 'board-composition' ? 'border-b-2 border-green-500 text-green-500' : ''}`}
-          onClick={() => setActiveTab('board-composition')}
+        <div
+          className={`pb-2 px-4 cursor-pointer ${
+            activeTab === "board-composition"
+              ? "border-b-2 border-green-500 text-green-500"
+              : ""
+          }`}
+          onClick={() => setActiveTab("board-composition")}
         >
           Board composition
           <span className="ml-1 text-green-500">✓</span>
         </div>
-        <div 
-          className={`pb-2 px-4 cursor-pointer ${activeTab === 'ethical-behaviour' ? 'border-b-2 border-green-500 text-green-500' : ''}`}
-          onClick={() => setActiveTab('ethical-behaviour')}
+        <div
+          className={`pb-2 px-4 cursor-pointer ${
+            activeTab === "ethical-behaviour"
+              ? "border-b-2 border-green-500 text-green-500"
+              : ""
+          }`}
+          onClick={() => setActiveTab("ethical-behaviour")}
         >
           Ethical behaviour
           <span className="ml-1 text-green-500">✓</span>
         </div>
-        <div 
-          className={`pb-2 px-4 cursor-pointer ${activeTab === 'compliance' ? 'border-b-2 border-green-500 text-green-500' : ''}`}
-          onClick={() => setActiveTab('compliance')}
+        <div
+          className={`pb-2 px-4 cursor-pointer ${
+            activeTab === "compliance"
+              ? "border-b-2 border-green-500 text-green-500"
+              : ""
+          }`}
+          onClick={() => setActiveTab("compliance")}
         >
           Compliance and risk management
           <span className="ml-1 text-green-500">✓</span>
         </div>
-        <div 
-          className={`pb-2 px-4 cursor-pointer ${activeTab === 'tax' ? 'border-b-2 border-green-500 text-green-500' : ''}`}
-          onClick={() => setActiveTab('tax')}
+        <div
+          className={`pb-2 px-4 cursor-pointer ${
+            activeTab === "tax"
+              ? "border-b-2 border-green-500 text-green-500"
+              : ""
+          }`}
+          onClick={() => setActiveTab("tax")}
         >
           Tax transparency
           <span className="ml-1 text-green-500">✓</span>
@@ -212,16 +228,17 @@ const ESGReportingApp = () => {
       <div>
         <div className="mb-6">
           <h2 className="text-lg font-medium mb-4">
-            1. Board diversity 
+            1. Board diversity
             <span className="text-green-500 ml-1">
               <Info size={16} className="inline" />
             </span>
           </h2>
-          
+
           <div className="grid grid-cols-2 gap-8">
             <div>
               <label className="block mb-2">
-                Total number of Board members (#) <span className="text-red-500">*</span>
+                Total number of Board members (#){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -231,10 +248,11 @@ const ESGReportingApp = () => {
                 className="border p-2 w-full rounded"
               />
             </div>
-            
+
             <div>
               <label className="block mb-2">
-                Number of Board members who are Black (#) <span className="text-red-500">*</span>
+                Number of Board members who are Black (#){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -244,10 +262,11 @@ const ESGReportingApp = () => {
                 className="border p-2 w-full rounded"
               />
             </div>
-            
+
             <div>
               <label className="block mb-2">
-                Percentage of Board members who are Black (%) <span className="text-red-500">*</span>
+                Percentage of Board members who are Black (%){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -257,10 +276,11 @@ const ESGReportingApp = () => {
                 className="border p-2 w-full rounded"
               />
             </div>
-            
+
             <div>
               <label className="block mb-2">
-                Number of Board members who are White (#) <span className="text-red-500">*</span>
+                Number of Board members who are White (#){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -273,7 +293,8 @@ const ESGReportingApp = () => {
 
             <div>
               <label className="block mb-2">
-                Percentage of Board members who are White (%) <span className="text-red-500">*</span>
+                Percentage of Board members who are White (%){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -283,10 +304,11 @@ const ESGReportingApp = () => {
                 className="border p-2 w-full rounded"
               />
             </div>
-            
+
             <div>
               <label className="block mb-2">
-                Number of Board members who are Indian (#) <span className="text-red-500">*</span>
+                Number of Board members who are Indian (#){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -299,7 +321,8 @@ const ESGReportingApp = () => {
 
             <div>
               <label className="block mb-2">
-                Percentage of Board members who are Indian (%) <span className="text-red-500">*</span>
+                Percentage of Board members who are Indian (%){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -309,10 +332,11 @@ const ESGReportingApp = () => {
                 className="border p-2 w-full rounded"
               />
             </div>
-            
+
             <div>
               <label className="block mb-2">
-                Number of Board members who are Asian (#) <span className="text-red-500">*</span>
+                Number of Board members who are Asian (#){" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -322,96 +346,18 @@ const ESGReportingApp = () => {
                 className="border p-2 w-full rounded"
               />
             </div>
-
-            <div>
-              <label className="block mb-2">
-                Percentage of Board members who are Asian (%) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="asianPercentage"
-                value={formData.asianPercentage}
-                onChange={handleInputChange}
-                className="border p-2 w-full rounded"
-              />
-            </div>
-            
-            <div>
-              <label className="block mb-2">
-                Number of Board members who are Coloured (#) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="colouredMembers"
-                value={formData.colouredMembers}
-                onChange={handleInputChange}
-                className="border p-2 w-full rounded"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2">
-                Percentage of Board members who are Coloured (%) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="colouredPercentage"
-                value={formData.colouredPercentage}
-                onChange={handleInputChange}
-                className="border p-2 w-full rounded"
-              />
-            </div>
-            
-            <div>
-              <label className="block mb-2">
-                Number of Board members who are below 30 (#) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="below30Members"
-                value={formData.below30Members}
-                onChange={handleInputChange}
-                className="border p-2 w-full rounded"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2">
-                Percentage of Board members who are below 30 (%) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="below30Percentage"
-                value={formData.below30Percentage}
-                onChange={handleInputChange}
-                className="border p-2 w-full rounded"
-              />
-            </div>
-            
-            <div>
-              <label className="block mb-2">
-                Number of Board members who are between 30 and 50 (#) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="between30And50Members"
-                value={formData.between30And50Members}
-                onChange={handleInputChange}
-                className="border p-2 w-full rounded"
-              />
-            </div>
           </div>
         </div>
-        
+
         <div className="mb-6">
           <h2 className="text-lg font-medium mb-4">
-            2. Board independence 
+            2. Board independence
             <span className="text-green-500 ml-1">
               <Info size={16} className="inline" />
             </span>
           </h2>
         </div>
-        
+
         <div className="mb-6">
           <label className="block mb-2">
             Board Profile <span className="text-red-500">*</span>
@@ -444,7 +390,7 @@ const ESGReportingApp = () => {
             className="border p-2 w-full rounded"
           />
         </div>
-        
+
         <div className="mb-8">
           <h2 className="text-lg font-medium mb-4">
             5. What is your company's vision statement?
@@ -458,7 +404,7 @@ const ESGReportingApp = () => {
             className="border p-2 w-full rounded"
           />
         </div>
-        
+
         <div className="mb-8">
           <h2 className="text-lg font-medium mb-4">
             6. What industry does your company operate in?
@@ -480,8 +426,13 @@ const ESGReportingApp = () => {
   const SuccessMessage = () => {
     return (
       <div className="bg-green-500 text-white p-3 flex justify-between items-center">
-        <p>Your report has been successfully generated. Download your ESG report.</p>
-        <button onClick={() => setShowSuccessMessage(false)} className="text-white">
+        <p>
+          Your report has been successfully generated. Download your ESG report.
+        </p>
+        <button
+          onClick={() => setShowSuccessMessage(false)}
+          className="text-white"
+        >
           <X size={20} />
         </button>
       </div>
@@ -501,7 +452,11 @@ const ESGReportingApp = () => {
       case 2:
         return <CompanyInfoForm />;
       case 3:
-        return <div className="text-center py-12">Environmental step content would go here</div>;
+        return (
+          <div className="text-center py-12">
+            Environmental step content would go here
+          </div>
+        );
       case 4:
         return (
           <div className="text-center py-12">
@@ -565,28 +520,20 @@ const ESGReportingApp = () => {
           <div className="ml-8 text-gray-700">
             JSE Sustainability Disclosure Guidance based reporting
           </div>
-          
-          {saving && (
-            <div className="ml-auto text-gray-500">
-              Saving ...
-            </div>
-          )}
-          
-          {saved && (
-            <div className="ml-auto text-gray-500">
-              Saved
-            </div>
-          )}
+
+          {saving && <div className="ml-auto text-gray-500">Saving ...</div>}
+
+          {saved && <div className="ml-auto text-gray-500">Saved</div>}
         </div>
       </header>
-      
+
       <main className="max-w-6xl mx-auto p-4">
         <div className="bg-white p-8 rounded shadow">
           <Steps />
           <StepLabels />
-          
+
           {renderStepContent()}
-          
+
           <div className="flex justify-center gap-4 mt-8">
             {currentStep > 1 && !reportGenerated && (
               <button
